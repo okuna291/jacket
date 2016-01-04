@@ -368,7 +368,7 @@ void loop()
       String yaws = String(yaw, 2);
       String pitchs = String(pitch,2);
       String rolls = String(roll,2);
-      String final = "b,"+yaws+","+pitchs+","+rolls+","+"a"; 
+      String final = "e,"+yaws+","+pitchs+","+rolls+","+"a"; 
     if(SerialDebug) {
 //    Serial.print(yaw, 2);
 //    Serial.print(",");
@@ -378,22 +378,23 @@ void loop()
       Serial.println(final);
       Serial1.println(final);
     }
-//     if(Serial1.available())
-// {
+     if(Serial1.available())
+ {
 //  Serial1.flush();
-//  if(Serial1.read()=='A')
-//  {
-//    digitalWrite(13,HIGH);
-//    Serial1.print("a");
-//    Serial1.print(",");
+  
+    digitalWrite(13,HIGH);
+    
+    
 //    Serial1.print("-12.34");
 //    Serial1.print(",");
 //    Serial1.print("-54.65");
 //    Serial1.print(",");
-//    Serial1.println("-118.24");
+//    Serial1.print("-118.24");
+//    Serial1.print(",");
+//    Serial1.print("a");
 //      Serial1.println(final);
-//  }
-// }
+ 
+ }
     // With these settings the filter is updating at a ~145 Hz rate using the Madgwick scheme and 
     // >200 Hz using the Mahony scheme even though the display refreshes at only 2 Hz.
     // The filter update rate is determined mostly by the mathematical steps in the respective algorithms, 

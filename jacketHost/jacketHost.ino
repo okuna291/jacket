@@ -22,23 +22,29 @@ String sstr,sstr1, sstr2, sstr3, sstr4, sstr5, sstr6;
 void setup()
 {
 Serial.begin(9600);
+
   // start the GZLL stack  
   RFduinoGZLL.begin(role);
 }
 
 void loop()
 {
+  delay(50);
   Serial.flush();
   if(sstr!="")  Serial.println(sstr);
   if(sstr1!="")  Serial.println(sstr1);
   if(sstr2!="")  Serial.println(sstr2);
   if(sstr3!="")  Serial.println(sstr3);
   if(sstr4!="")  Serial.println(sstr4);
+  if(sstr5!="")  Serial.println(sstr5);
+  if(sstr6!="")  Serial.println(sstr6);
   sstr="";
   sstr1="";
   sstr2="";
   sstr3="";
   sstr4="";
+  sstr5="";
+  sstr6="";
 }
 
 void RFduinoGZLL_onReceive(device_t device, int rssi, char *data, int len)

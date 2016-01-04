@@ -1,6 +1,8 @@
 #include <RFduinoGZLL.h> // include rfduino library
+device_t role = DEVICE5; // set Device name... DEVICE2 to DEVICE7 / HOST
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
+char mydata[25];
 void setup() {
   // initialize serial:
   Serial.begin(9600);
@@ -10,6 +12,7 @@ void setup() {
   RFduinoGZLL.begin(role); // begin BLE communications
   pinMode(2,OUTPUT);
   pinMode(3,OUTPUT);
+  
 }
 void loop() {
 //  Serial.println("A");
@@ -18,12 +21,12 @@ digitalWrite(2,LOW);
 //  delay(25);
   serialEvent(); //call the function
   // print the string when a newline arrives:
-  char mydata[25]; // declare mydata array+
+   // declare mydata array+
   if (stringComplete) {
     Serial.println(inputString);
     inputString.toCharArray(mydata, 25);
     digitalWrite(2,HIGH);
-    RFduinoGZLL.sendToHost(mydata, 25); // send buffer to host other rfduino
+     // send buffer to host other rfduino
     // clear the string:
     inputString = "";
     stringComplete = false;
@@ -43,5 +46,5 @@ void serialEvent() {
 }
 void RFduinoGZLL_onReceive(device_t device, int rssi, char *data, int len) // this function receives BLE communications
 {
-
+RFduinoGZLL.sendToHost(mydata, 25);
 }
