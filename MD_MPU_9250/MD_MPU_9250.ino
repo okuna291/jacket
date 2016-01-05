@@ -368,7 +368,7 @@ void loop()
       String yaws = String(yaw, 2);
       String pitchs = String(pitch,2);
       String rolls = String(roll,2);
-      String final = "e,"+yaws+","+pitchs+","+rolls+","+"a"; 
+      String final = "f,"+yaws+","+pitchs+","+rolls+","+"a"; 
     if(SerialDebug) {
 //    Serial.print(yaw, 2);
 //    Serial.print(",");
