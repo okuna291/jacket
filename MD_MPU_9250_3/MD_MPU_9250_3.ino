@@ -231,6 +231,7 @@ float eInt[3] = {0.0f, 0.0f, 0.0f};       // vector to hold integral error for M
 //
 //var qu;
 
+String yflag,pflag,rflag;
 void setup()
 {
   Wire.begin();
@@ -365,17 +366,31 @@ void loop()
 //      qu.yawa=yaw;
 //      qu.pitcha=pitch;
 //      qu.rolla=roll;
+yflag="P";
+pflag="P";
+rflag="P";
+
+if (yaw<0){
+  yflag="N";
+  }
+if (pitch<0){
+  pflag="N";
+  }
+if (roll<0){
+  rflag="N";
+  }
       String yaws = String(yaw, 2);
       String pitchs = String(pitch,2);
       String rolls = String(roll,2);
-      String final = "e,"+yaws+","+pitchs+","+rolls+","+"a"; 
+      String final = "f,"+yaws+","+pitchs+","+rolls+","+"a"; 
     if(SerialDebug) {
 //    Serial.print(yaw, 2);
 //    Serial.print(",");
 //    Serial.print(pitch, 2);
 //    Serial.print(",");
 //    Serial.println(roll, 2);
-      Serial.println(final);
+
+      Serial.println(yflag+pflag+rflag+"a");
       Serial1.println(final);
     }
      if(Serial1.available())

@@ -1,5 +1,7 @@
 #include <RFduinoGZLL.h> // include rfduino library
-device_t role = DEVICE6; // set Device name... DEVICE2 to DEVICE7 / HOST
+device_t role = HOST; // set Device name... DEVICE2 to DEVICE7 / HOST
+int devID=99;
+char mydata[25];
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 void setup() {
@@ -13,18 +15,19 @@ void setup() {
   pinMode(3,OUTPUT);
 }
 void loop() {
-//  Serial.println("A");
+
 digitalWrite(2,LOW);
   digitalWrite(3,LOW);
 //  delay(25);
   serialEvent(); //call the function
   // print the string when a newline arrives:
-  char mydata[25]; // declare mydata array+
+//  char mydata[25]; // declare mydata array+
   if (stringComplete) {
     Serial.println(inputString);
     inputString.toCharArray(mydata, 25);
+   
     digitalWrite(2,HIGH);
-    RFduinoGZLL.sendToHost(mydata, 25); // send buffer to host other rfduino
+//    RFduinoGZLL.sendToHost(mydata, 25); // send buffer to host other rfduino
     // clear the string:
     inputString = "";
     stringComplete = false;
@@ -37,12 +40,16 @@ void serialEvent() {
     char inChar = (char)Serial.read();
     if (inChar == 97) {
       stringComplete = true;
-      digitalWrite(3,HIGH);
+//      digitalWrite(3,HIGH);
     }
     else     inputString += inChar;
   }
 }
 void RFduinoGZLL_onReceive(device_t device, int rssi, char *data, int len) // this function receives BLE communications
 {
-
+ digitalWrite(3,LOW);
+  if(data[0]==devID){
+   
+  RFduinoGZLL.sendToDevice(device, mydata);}
+digitalWrite(3,HIGH);
 }
